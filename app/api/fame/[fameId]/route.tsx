@@ -26,6 +26,10 @@ export async function PATCH(
 
         const wallet = user.web3Wallets.find(wallet => wallet.id === user.primaryWeb3WalletId);
 
+        if (!wallet) {
+            return new NextResponse("Wallet required", { status: 400 });
+        }
+
 
         const fame = await prismadb.fame.update({
             where: {
